@@ -1,0 +1,46 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 40px auto; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    <h2 style="color: #2c3e50; margin-top: 0;">Issue Book</h2>
+    <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 25px;">
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; font-weight: bold; margin-bottom: 8px;">Select Member</label>
+            <select name="member" required style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ddd;">
+                <option value="">-- Choose Member --</option>
+                {% for m in members %}
+                <option value="{{ m.id }}">{{ m.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; font-weight: bold; margin-bottom: 8px;">Select Book</label>
+            <select name="book" required style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ddd;">
+                <option value="">-- Choose Book --</option>
+                {% for b in books %}
+                <option value="{{ b.id }}">{{ b.title }} ({{ b.quantity }} in stock)</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="margin-bottom: 25px;">
+            <label style="display: block; font-weight: bold; margin-bottom: 8px;">Return Due Date</label>
+            <input type="date" name="due_date" required style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ddd;">
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+            <button type="submit" style="flex: 2; background: #27ae60; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                Confirm Loan
+            </button>
+            <a href="{% url 'home' %}" style="flex: 1; text-align: center; background: #95a5a6; color: white; padding: 12px; border-radius: 6px; text-decoration: none;">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

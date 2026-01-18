@@ -1,0 +1,29 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+    <h1>Book Catalog</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>ISBN</th>
+                <th>Available Qty</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author.name }}</td>
+                <td>{{ book.category.category_name }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.quantity }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">No books found in catalog.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

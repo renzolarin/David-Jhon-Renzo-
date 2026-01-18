@@ -1,0 +1,26 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+    <h1>System Reports</h1>
+    <h3>Active Borrowers (Not yet returned)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Member</th>
+                <th>Book Title</th>
+                <th>Borrow Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for borrow in active_borrows %}
+            <tr>
+                <td>{{ borrow.member.name }}</td>
+                <td>{{ borrow.book.title }}</td>
+                <td>{{ borrow.borrow_date }}</td>
+                <td class="status-borrowed">{{ borrow.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
